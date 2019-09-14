@@ -1,0 +1,296 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>MK8DXコース一覧</title>
+
+  <!-- load font and css -->
+  <link rel="stylesheet" type="text/css" href="sokuji_v2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- clippboard button -->
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+	<script>
+			$(function () {
+				var clipboard = new Clipboard('.cbtn');
+				clipboard.on('success', function(e) {
+    			e.clearSelection();
+				});
+			});
+	</script>
+
+  <!-- キャッシュによってcssが更新されない場合のための記述-->
+  <style>
+  .course_table{
+    padding: auto;
+    font-family: "M PLUS Rounded 1c";
+  }
+
+  .course_table td{
+    font-size: 10px;
+    padding: 10px;
+    background-color: #ffffff !important;
+  }
+
+  .cstextarea{
+    font-size: 8px;
+    border: 0px;
+    background-color: #fcfcfc;
+    padding: 10px;
+  }
+  </style>
+</head>
+<body>
+
+
+<!--
+
+  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗
+  ████╗ ████║██╔══██╗██╔══██╗██║██╔═══██╗
+  ██╔████╔██║███████║██████╔╝██║██║   ██║
+  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║   ██║
+  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╔╝
+  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝
+
+  ██╗  ██╗ █████╗ ██████╗ ████████╗ █████╗ ██████╗ ██╗  ██╗
+  ██║ ██╔╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗╚██╗██╔╝
+  █████╔╝ ███████║██████╔╝   ██║   ╚█████╔╝██║  ██║ ╚███╔╝
+  ██╔═██╗ ██╔══██║██╔══██╗   ██║   ██╔══██╗██║  ██║ ██╔██╗
+  ██║  ██╗██║  ██║██║  ██║   ██║   ╚█████╔╝██████╔╝██╔╝ ██╗
+  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═════╝ ╚═╝  ╚═╝
+
+  ── ── ── ── ── ── ── ██ ██ ██ ██ ── ██ ██ ██ ──
+  ── ── ── ── ── ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██
+  ── ── ── ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██
+  ── ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ░░ ░░ ██
+  ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ░░ ██
+  ── ── ██ ▓▓ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ██ ██ ██ ──
+  ── ██ ██ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ── ██ ░░ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ██ ░░ ░░ ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ██ ░░ ░░ ░░ ██ ░░ ░░ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ── ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ░░ ░░ ██ ██ ██ ──
+  ── ── ██ ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ██ ▓▓ ██ ──
+  ── ── ── ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ▓▓ ██ ──
+  ── ░░ ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ▓▓ ██ ── ──
+  ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██ ██ ██ ██ ──
+  ── ██ ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ──
+  ── ── ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ██
+  ── ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ██ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ── ── ── ██ ▓▓ ▓▓ ██ ██
+  ██ ▓▓ ▓▓ ██ ██ ── ── ── ── ── ── ── ██ ██ ██ ──
+  ── ██ ██ ── ── ── ── ── ── ── ── ── ── ── ── ──
+
+-->
+
+
+<!-- course list -->
+<center>
+  <h3>MK8Dコースめも</h3>
+</center>
+<hr />
+<center>
+  <div style="padding:10px;">
+    タップすると色が変わります。(未選択・味方コース・敵コース等)<br />
+    <a href="sokuji.html">交流戦</a>,
+    <a href="sokuji_four.html">フォーマンセル</a>,
+    <a href="sokuji_tri.html">トリプルス</a>,
+    <a href="sokuji_tag.html">タッグ</a>,
+    <a href="http://paper-web.sakura.ne.jp/sokuji/old.html">旧版</a>
+    <br />
+  </div>
+</center>
+
+<center>
+  <div style="padding:10px; font-size:8px;">
+    コース一覧のメモをテキストにして出力します。<br />
+    マリオカート8のダウンロードコンテンツは英語の頭文字に「d」が付いています（例：dBP→ダウンロードコンテンツのベビィパーク）。
+  </div>
+  <div style="padding:10px; text-align: left; width: 50%; font-size: 12px;">
+    <center>
+      赤選択コースのマーク(<input type="text" id="mark_red" size="4" placeholder="なし">),
+      青選択コースマーク(<input type="text" id="mark_blue" size="4" placeholder="*">),
+      区切り文字(<input type="text" id="delimiter" size="4" placeholder=",">)
+    </center>
+  </div>
+</center>
+
+<hr />
+
+<center>
+  <table class="courselisttable">
+    <tr>
+      <td>日本語名</td>
+      <td>英語略称</td>
+      <td>日本語略称</td>
+    </tr>
+    <tr>
+      <td><textarea type="text" id="coursetxt" rows="2" cols="30" placeholder="コース一覧" class="cstextarea"></textarea></td>
+      <td><textarea type="text" id="coursetxten" rows="2" cols="30" placeholder="コース一覧" class="cstextarea"></textarea></td>
+      <td><textarea type="text" id="coursetxtjps" rows="2" cols="30" placeholder="コース一覧" class="cstextarea"></textarea></td>
+    </tr>
+    <tr>
+      <td><button class="cbtn" data-clipboard-target="#coursetxt">コピーする</button></td>
+      <td><button class="cbtn" data-clipboard-target="#coursetxten">コピーする</button></td>
+      <td><button class="cbtn" data-clipboard-target="#coursetxtjps">コピーする</button></td>
+    </tr>
+  </table>
+</center>
+
+<hr />
+<br />
+<center>
+<table class="alt-table-responsive course_table">
+  <tr>
+    <td>
+    	<table>
+    		<tr>
+    			<td><div class="toggle" jpname="マリオカートスタジアム" enname="MKS" jpshort="ﾏﾘｶｽ"/>マリオカートスタジアム<br/>(MKS)</td>
+    			<td><div class="toggle" jpname="マリオサーキット" enname="MC" jpshort="新ﾏﾘｻ"/>マリオサーキット<br/>(MC)</td>
+    			<td><div class="toggle" jpname="サンシャイン空港" enname="SA" jpshort="空港"/>サンシャイン空港<br/>(SA)</td>
+    			<td><div class="toggle" jpname="スカイガーデン" enname="CC" jpshort="ｽｶｶﾞ"/>スカイガーデン<br/>(CC)</td>
+    			<td><div class="toggle" jpname="ヨッシーサーキット" enname="dYC" jpshort="ﾖｼｻ"/>ヨッシーサーキット<br/>(dYC)</td>
+    			<td><div class="toggle" jpname="ベビィパーク" enname="dBP" jpshort="ﾍﾞﾋﾞﾊﾟ"/>ベビィパーク<br/>(dBP)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="ウォーターパーク" enname="WP" jpshort="ｳｫﾀﾊﾟ"/>ウォーターパーク<br/>(WP)</td>
+    			<td><div class="toggle" jpname="キノピオハーバー" enname="TH" jpshort="ﾊｰﾊﾞｰ"/>キノピオハーバー<br/>(TH)</td>
+    			<td><div class="toggle" jpname="ドルフィンみさき" enname="DS" jpshort="ﾄﾞﾙﾐ"/>ドルフィンみさき<br/>(DS)</td>
+    			<td><div class="toggle" jpname="ホネホネさばく" enname="BDD" jpshort="ﾎﾈﾎﾈ"/>ホネホネさばく<br/>(BDD)</td>
+    			<td><div class="toggle" jpname="エキサイトバイク" enname="dEA" jpshort="ｴｷﾊﾞ"/>エキサイトバイク<br/>(dEA)</td>
+    			<td><div class="toggle" jpname="チーズランド" enname="dCL" jpshort="ﾁｰｽﾞ"/>チーズランド<br/>(dCL)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="スイーツキャニオン" enname="SSC" jpshort="ｽｲｷｬﾆ"/>スイーツキャニオン<br/>(SSC)</td>
+    			<td><div class="toggle" jpname="ねじれマンション" enname="TM" jpshort="ねじﾏﾝ"/>ねじれマンション<br/>(TM)</td>
+    			<td><div class="toggle" jpname="エレクトロドリーム" enname="Ed" jpshort="ｴﾚﾄﾞﾘ"/>エレクトロドリーム<br/>(Ed)</td>
+    			<td><div class="toggle" jpname="クッパキャッスル" enname="BC" jpshort="ｸﾊﾟｷｬ"/>クッパキャッスル<br/>(BC)</td>
+    			<td><div class="toggle" jpname="ドラゴンロード" enname="dDD" jpshort="ﾄﾞﾗﾛ"/>ドラゴンロード<br/>(dDD)</td>
+    			<td><div class="toggle" jpname="ネイチャーロード" enname="dWW" jpshort="ﾈｲﾁｬｰ"/>ネイチャーロード<br/>(dWW)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="ドッスンいせき" enname="TR" jpshort="遺跡"/>ドッスンいせき<br/>(TR)</td>
+    			<td><div class="toggle" jpname="ヘイホーこうざん" enname="SGF" jpshort="ﾍｲ鉱"/>ヘイホーこうざん<br/>(SGF)</td>
+    			<td><div class="toggle" jpname="ワリオスノーマウンテン" enname="MW" jpshort="ﾜﾘｽﾉ"/>ワリオスノーマウンテン<br/>(MW)</td>
+    			<td><div class="toggle" jpname="レインボーロード" enname="RR" jpshort="新虹"/>レインボーロード<br/>(RR)</td>
+    			<td><div class="toggle" jpname="ミュートシティ" enname="dMC" jpshort="ﾐｭｰﾄ"/>ミュートシティ<br/>(dMC)</td>
+    			<td><div class="toggle" jpname="どうぶつの森" enname="dAC" jpshort="どう森"/>どうぶつの森<br/>(dAC)</td>
+    	  </tr>
+    	</table>
+    </td>
+    <td>
+    	<table>
+    		<tr>
+    			<td><div class="toggle" jpname="モーモーカントリー" enname="MMM" jpshort="ﾓﾓｶﾝ"/>モーモーカントリー<br/>(MMM)</td>
+    			<td><div class="toggle" jpname="カラカラさばく" enname="DDD" jpshort="ｶﾗｶﾗ"/>カラカラさばく<br/>(DDD)</td>
+    			<td><div class="toggle" jpname="ワリオスタジアム" enname="WS" jpshort="ﾜﾘｽﾀ"/>ワリオスタジアム<br/>(WS)</td>
+    			<td><div class="toggle" jpname="チクタクロック" enname="TTC" jpshort="ﾁｸﾀｸ"/>チクタクロック<br/>(TTC)</td>
+    			<td><div class="toggle" jpname="ワリオこうざん" enname="dWGM" jpshort="ﾜﾘ鉱"/>ワリオこうざん<br/>(dWGM)</td>
+    			<td><div class="toggle" jpname="ネオクッパシティ	" enname="dNBC" jpshort="ﾈｵﾊﾟ"/>ネオクッパシティ	<br/>(dNBC)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="GBAマリオサーキット" enname="rMC" jpshort="GBAﾏﾘｻ"/>GBAマリオサーキット<br/>(rMC)</td>
+    			<td><div class="toggle" jpname="ドーナツへいや3" enname="DP3" jpshort="平野"/>ドーナツへいや3<br/>(DP3)</td>
+    			<td><div class="toggle" jpname="シャーベットランド" enname="SL" jpshort="ｼｬﾍﾞﾗﾝ"/>シャーベットランド<br/>(SL)</td>
+    			<td><div class="toggle" jpname="パックンスライダー" enname="PPS" jpshort="ﾊﾟｸｽﾗ"/>パックンスライダー<br/>(PPS)</td>
+    			<td><div class="toggle" jpname="SFCレインボーロード" enname="dRR" jpshort="SFC虹"/>SFCレインボーロード<br/>(dRR)</td>
+    			<td><div class="toggle" jpname="リボンロード" enname="dRiR" jpshort="ﾘﾎﾞﾝ"/>リボンロード<br/>(dRiR)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="プクプクビーチ" enname="CCB" jpshort="ﾌﾟｸﾋﾞ"/>プクプクビーチ<br/>(CCB)</td>
+    			<td><div class="toggle" jpname="ピーチサーキット" enname="rRRy" jpshort="ﾋﾟﾁｻ"/>ピーチサーキット<br/>(rRRy)</td>
+    			<td><div class="toggle" jpname="ミュージックパーク" enname="MP" jpshort="ﾐｭｰﾊﾟ"/>ミュージックパーク<br/>(MP)</td>
+    			<td><div class="toggle" jpname="グラグラかざん" enname="GV" jpshort="火山"/>グラグラかざん<br/>(GV)</td>
+    			<td><div class="toggle" jpname="ツルツルツイスター" enname="dIIO" jpshort="ﾂﾂﾂ"/>ツルツルツイスター<br/>(dIIO)</td>
+    			<td><div class="toggle" jpname="リンリンメトロ" enname="dSBS" jpshort="ﾘﾝﾒﾄ"/>リンリンメトロ<br/>(dSBS)</td>
+    	</tr>
+    		<tr>
+    			<td><div class="toggle" jpname="キノピオハイウェイ" enname="TT" jpshort="ﾊｲｳｪｲ"/>キノピオハイウェイ<br/>(TT)</td>
+    			<td><div class="toggle" jpname="DKジャングル" enname="DKJ" jpshort="ｼﾞｬﾝｸﾞﾙ"/>DKジャングル<br/>(DKJ)</td>
+    			<td><div class="toggle" jpname="ヨッシーバレー" enname="YV" jpshort="ﾖｼﾊﾞ"/>ヨッシーバレー<br/>(YV)</td>
+    			<td><div class="toggle" jpname="64レインボーロード" enname="rRRd" jpshort="64虹"/>64レインボーロード<br/>(rRRd)</td>
+    			<td><div class="toggle" jpname="ハイラルサーキット" enname="dHC" jpshort="ﾊｲﾗﾙ"/>ハイラルサーキット<br/>(dHC)</td>
+    			<td><div class="toggle" jpname="ビッグブルー" enname="dBB" jpshort="BB"/>ビッグブルー<br/>(dBB)</td>
+    		</tr>
+    	</table>
+    </td>
+  </tr>
+</table>
+</center>
+<br />
+
+<!-- script for calc point -->
+<script>
+
+// toggle classname to change bg-color
+$('.toggle, .imclass1, .imclass2, .imclass3').click(function () {
+	var classes = ['imclass1','imclass2','imclass3'];
+	$(this).each(function(){
+		this.className = classes[($.inArray(this.className, classes)+1)%classes.length];
+	});
+});
+
+$('.toggle, .imclass1, .imclass2, .imclass3').click(function () {
+  course_list = $("#coursetxt").val();
+  course_listen = $("#coursetxten").val();
+  course_listjps = $("#coursetxtjps").val();
+
+  markred = $("#mark_red").val();
+  if (markred.length==0){markred = "";}
+  markblue = $("#mark_blue").val();
+  if (markblue.length==0){markblue = "*";}
+  delimiter = $("#delimiter").val();
+  if (delimiter.length==0){delimiter = ",";}
+
+  // add/remove course name
+  $(this).each(function () {
+    cname = $(this).attr('jpname');
+    cnameen = $(this).attr('enname');
+    cnamejps = $(this).attr('jpshort');
+
+      clsn = this.className;
+
+      if(clsn=="imclass1"){
+        course_list = course_list + cname + markred + delimiter;
+        course_listen = course_listen + cnameen + markred + delimiter;
+        course_listjps = course_listjps + cnamejps + markred + delimiter;
+      } else if (clsn=="imclass2"){
+        course_list = course_list.replace(cname+markred,cname+markblue) ;
+        course_listen = course_listen.replace(cnameen+markred,cnameen+markblue) ;
+        course_listjps = course_listjps.replace(cnamejps+markred,cnamejps+markblue) ;
+      } else if (clsn=="imclass3"){
+        course_list = course_list.replace(cname+markblue+delimiter,"") ;
+        course_listen = course_listen.replace(cnameen+markblue+delimiter,"") ;
+        course_listjps = course_listjps.replace(cnamejps+markblue+delimiter,"") ;
+      }
+
+  });
+
+  // rewrite textarea
+  $("#coursetxt").val(course_list);
+  $("#coursetxten").val(course_listen);
+  $("#coursetxtjps").val(course_listjps);
+});
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88661314-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88661314-2');
+</script>
+
+</body>
+</html>

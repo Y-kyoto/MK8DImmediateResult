@@ -1,0 +1,1319 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>MK8DX4v4v4(フォーマンセル)即時集計</title>
+
+  <!-- load font and css -->
+  <link rel="stylesheet" type="text/css" href="sokuji_v2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- clippboard button -->
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+	<script>
+			$(function () {
+				var clipboard = new Clipboard('.cbtn');
+				clipboard.on('success', function(e) {
+    			e.clearSelection();
+				});
+			});
+	</script>
+</head>
+<body>
+
+
+<!--
+
+  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗
+  ████╗ ████║██╔══██╗██╔══██╗██║██╔═══██╗
+  ██╔████╔██║███████║██████╔╝██║██║   ██║
+  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║   ██║
+  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╔╝
+  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝
+
+  ██╗  ██╗ █████╗ ██████╗ ████████╗ █████╗ ██████╗ ██╗  ██╗
+  ██║ ██╔╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗╚██╗██╔╝
+  █████╔╝ ███████║██████╔╝   ██║   ╚█████╔╝██║  ██║ ╚███╔╝
+  ██╔═██╗ ██╔══██║██╔══██╗   ██║   ██╔══██╗██║  ██║ ██╔██╗
+  ██║  ██╗██║  ██║██║  ██║   ██║   ╚█████╔╝██████╔╝██╔╝ ██╗
+  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═════╝ ╚═╝  ╚═╝
+
+  ── ── ── ── ── ── ── ██ ██ ██ ██ ── ██ ██ ██ ──
+  ── ── ── ── ── ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██
+  ── ── ── ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██
+  ── ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ░░ ░░ ██
+  ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ░░ ██
+  ── ── ██ ▓▓ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ██ ██ ██ ──
+  ── ██ ██ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ── ██ ░░ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ██ ░░ ░░ ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ██ ░░ ░░ ░░ ██ ░░ ░░ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ── ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ░░ ░░ ██ ██ ██ ──
+  ── ── ██ ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ██ ▓▓ ██ ──
+  ── ── ── ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ▓▓ ██ ──
+  ── ░░ ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ▓▓ ██ ── ──
+  ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██ ██ ██ ██ ──
+  ── ██ ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ──
+  ── ── ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ██
+  ── ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ██ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ── ── ── ██ ▓▓ ▓▓ ██ ██
+  ██ ▓▓ ▓▓ ██ ██ ── ── ── ── ── ── ── ██ ██ ██ ──
+  ── ██ ██ ── ── ── ── ── ── ── ── ── ── ── ── ──
+
+-->
+
+
+<!-- course list -->
+<center>
+  <h3>MK8DX4v4v4(フォーマンセル)即時集計</h3>
+</center>
+
+<hr />
+
+<!-- top -->
+<center>
+  <div style="padding:10px;">
+    <input type="text" id="teamA" cols=9 rows=1 placeholder="teamA" class="teamnames_four"> vs
+    <input type="text" id="teamB" cols=9 rows=1 placeholder="teamB" class="teamnames_four"> vs
+    <input type="text" id="teamC" cols=9 rows=1 placeholder="teamC" class="teamnames_four">
+    <br />
+    <br />
+    各順位を取ったチームを選択してください。
+    <br />
+    順番に
+    <span style="color:#006e54"><b>チームA(自分チーム)</b></span>、
+    <span style="color:#915c8b"><b>チームB</b></span>、
+    <span style="color:#6e7955"><b>チームC</b></span>
+    が対応しています。
+    [Copy]でそのレースのリザルトをコピーできます。
+    <br />
+    <a href="sokuji.html">交流戦</a>,
+    <a href="sokuji_four.html">フォーマンセル</a>,
+    <a href="sokuji_tri.html">トリプルス</a>,
+    <a href="sokuji_tag.html">タッグ</a>,
+    <a href="http://paper-web.sakura.ne.jp/sokuji/old.html">旧版</a>,
+    <br />
+    <br />
+    <b>全レース合計：</b> <select name="example" size="1" id="total_race_num">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12" selected>12</option>
+    </select>
+
+    <b>レース</b>
+  </div>
+</center>
+
+<!-- race result -->
+<div class="printer-type" id="resultarray">
+  <table border="0" class="printer-row table table-striped table-hover table-condensed table-responsive">
+    <tr class="onerace">
+      <td class="oneracepoints">&nbsp;</td>
+      <td>1st</td>
+      <td>2nd</td>
+      <td>3rd</td>
+      <td>4th</td>
+      <td>5th</td>
+      <td>6th</td>
+      <td>7th</td>
+      <td>8th</td>
+      <td>9th</td>
+      <td>10th</td>
+      <td>11th</td>
+      <td>12th</td>
+			<td>Copy</td>
+      <td>Result</td>
+    </tr>
+    <tr class="onerace">
+      <td round="1">Race 1</td>
+      <td>
+          <input type="radio" class="chb_four" name="1-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="1-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="1-15" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-12" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-10" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-9" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-8" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-7" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-6" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-5" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-4" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-3" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-2" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="1-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="1-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="1-1" value="C" teamname="C" ><br/>
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race1">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race1">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="2">Race 2</td>
+      <td>
+          <input type="radio" class="chb_four" name="2-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="2-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="2-15" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-12" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-10" value="C" teamname="C" ><br/>
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-9" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-8" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-7" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-6" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-5" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-4" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-3" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-2" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="2-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="2-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="2-1" value="C" teamname="C" ><br/>
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race2">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race2">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="3">Race 3</td>
+      <td>
+          <input type="radio" class="chb_four" name="3-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="3-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="3-15" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-12" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-10" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-9" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-8" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-7" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-6" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-5" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-4" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-3" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-2" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="3-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="3-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="3-1" value="C" teamname="C" ><br/>
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race3">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race3">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="4">Race 4</td>
+      <td>
+          <input type="radio" class="chb_four" name="4-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="4-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="4-15" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-12" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-10" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-9" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-8" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-7" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-6" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-5" value="C" teamname="C" ><br/>
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="4-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="4-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="4-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+				<button class="cbtn" data-clipboard-target="#race4">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race4">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="5">Race 5</td>
+      <td>
+          <input type="radio" class="chb_four" name="5-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="5-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="5-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="5-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="5-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="5-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race5">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race5">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="6">Race 6</td>
+      <td>
+          <input type="radio" class="chb_four" name="6-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="6-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="6-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="6-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="6-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="6-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race6">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race6">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="7">Race 7</td>
+      <td>
+          <input type="radio" class="chb_four" name="7-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="7-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="7-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="7-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="7-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="7-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+				<button class="cbtn" data-clipboard-target="#race7">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race7">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="8">Race 8</td>
+      <td>
+          <input type="radio" class="chb_four" name="8-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="8-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="8-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="8-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="8-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="8-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+				<button class="cbtn" data-clipboard-target="#race8">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race8">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="9">Race 9</td>
+      <td>
+          <input type="radio" class="chb_four" name="9-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="9-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="9-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="9-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="9-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="9-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race9">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race9">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="10"><span class="title">Race 10</span></td>
+      <td>
+          <input type="radio" class="chb_four" name="10-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="10-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="10-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="10-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="10-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="10-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race10">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race10">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="11">Race 11</td>
+      <td>
+          <input type="radio" class="chb_four" name="11-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="11-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="11-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="11-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="11-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="11-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race11">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race11">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="12">Final Race </td>
+      <td>
+          <input type="radio" class="chb_four" name="12-15" value="A" teamname="A"  checked><br/>
+          <input type="radio" class="chb_four" name="12-15" value="B" teamname="B" ><br/>
+          <input type="radio" class="chb_four" name="12-15" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-12" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-12" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-12" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-10" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-10" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-10" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-9" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-9" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-9" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-8" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-8" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-8" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-7" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-7" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-7" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-6" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-6" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-6" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-5" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-5" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-5" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-4" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-4" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-4" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-3" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-3" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-3" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-2" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-2" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-2" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+      <td>
+        <input type="radio" class="chb_four" name="12-1" value="A" teamname="A"  checked><br/>
+        <input type="radio" class="chb_four" name="12-1" value="B" teamname="B" ><br/>
+        <input type="radio" class="chb_four" name="12-1" value="C" teamname="C" ><br/>
+
+
+
+      </td>
+			<td>
+				<button class="cbtn" data-clipboard-target="#race12">
+					Copy
+				</button>
+			</td>
+      <td class="oneracepoints" id="race12">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td class="oneracepoints">&nbsp;</td>
+      <td>1st</td>
+      <td>2nd</td>
+      <td>3rd</td>
+      <td>4th</td>
+      <td>5th</td>
+      <td>6th</td>
+      <td>7th</td>
+      <td>8th</td>
+      <td>9th</td>
+      <td>10th</td>
+      <td>11th</td>
+      <td>12th</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+<hr />
+<!-- import js after load body -->
+<script src="sokuji.js"></script>
+
+<!-- sakura -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3422749596492644"
+     data-ad-slot="1648297909"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<center>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88661314-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-88661314-2');
+  </script>
+</center>
+</body>
+</html>

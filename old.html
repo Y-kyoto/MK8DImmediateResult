@@ -1,0 +1,403 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>交流戦即時集計 - mk8dx - マリオカート8DX</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+
+  body {
+    font-family: "Rounded Mplus 1c";
+    padding: 30px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left : auto;
+  }
+
+  .oneracepoints{
+    width: 120px;
+    display: inline-block;
+    font-size: 12px;
+  }
+
+  input[type=checkbox] {
+      transform: scale(1.6);
+  }
+
+  </style>
+</head>
+<body>
+
+<!--
+
+  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗
+  ████╗ ████║██╔══██╗██╔══██╗██║██╔═══██╗
+  ██╔████╔██║███████║██████╔╝██║██║   ██║
+  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║   ██║
+  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╔╝
+  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝
+
+  ██╗  ██╗ █████╗ ██████╗ ████████╗ █████╗ ██████╗ ██╗  ██╗
+  ██║ ██╔╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗╚██╗██╔╝
+  █████╔╝ ███████║██████╔╝   ██║   ╚█████╔╝██║  ██║ ╚███╔╝
+  ██╔═██╗ ██╔══██║██╔══██╗   ██║   ██╔══██╗██║  ██║ ██╔██╗
+  ██║  ██╗██║  ██║██║  ██║   ██║   ╚█████╔╝██████╔╝██╔╝ ██╗
+  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚════╝ ╚═════╝ ╚═╝  ╚═╝
+
+  ── ── ── ── ── ── ── ██ ██ ██ ██ ── ██ ██ ██ ──
+  ── ── ── ── ── ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██
+  ── ── ── ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██
+  ── ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ░░ ░░ ██
+  ── ── ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ░░ ██
+  ── ── ██ ▓▓ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ██ ██ ██ ──
+  ── ██ ██ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ── ██ ░░ ██ ██ ░░ ░░ ░░ ██ ░░ ██ ░░ ██ ▓▓ ▓▓ ██
+  ██ ░░ ░░ ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ██ ░░ ░░ ░░ ██ ░░ ░░ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ██
+  ── ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ░░ ░░ ██ ██ ██ ──
+  ── ── ██ ██ ░░ ░░ ░░ ░░ ██ ██ ██ ██ ██ ▓▓ ██ ──
+  ── ── ── ██ ██ ██ ░░ ░░ ░░ ░░ ░░ ██ ▓▓ ▓▓ ██ ──
+  ── ░░ ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ▓▓ ██ ── ──
+  ── ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ██ ░░ ░░ ░░ ██ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ░░ ░░ ██ ── ── ──
+  ██ ██ ██ ▓▓ ▓▓ ▓▓ ▓▓ ██ ░░ ░░ ░░ ██ ██ ██ ██ ──
+  ── ██ ██ ██ ▓▓ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ──
+  ── ── ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ██
+  ── ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ██ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▓▓ ▓▓ ▓▓ ██
+  ██ ▓▓ ▓▓ ██ ██ ██ ██ ██ ── ── ── ██ ▓▓ ▓▓ ██ ██
+  ██ ▓▓ ▓▓ ██ ██ ── ── ── ── ── ── ── ██ ██ ██ ──
+  ── ██ ██ ── ── ── ── ── ── ── ── ── ── ── ── ──
+
+-->
+
+<center>
+  <h3>交流戦即時集計</h3>
+  <hr />
+  <div style="padding:10px;">
+    <input type="text" id="teamA" cols=10 rows=1 placeholder="teamA"> vs
+    <input type="text" id="teamB" cols=10 rows=1 placeholder="teamB">
+    <br />
+    <br />
+    チームAのメンバーが取った順位にチェックを入れてください。レースの点数 / ここまでの合計点数 (diff:点数差 Rem:残りレース数)
+    <br />
+    4v4v4(フォーマンセル)即時集計は<a href="http://paper-web.sakura.ne.jp/sokuji/sokuji_four.html">こちら</a>, 3v3v3v3(トリプルス)即時集計は<a href="http://paper-web.sakura.ne.jp/sokuji/sokuji_tri.html">こちら</a>です。
+    <br />
+    <br />
+    <b>全レース合計：</b> <select name="example" size="1" id="total_race_num">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12" selected>12</option>
+    </select>
+
+    <b>レース</b>
+  </div>
+</center>
+
+
+<div class="printer-type" id="resultarray">
+  <table border="0" class="printer-row table table-striped table-hover table-condensed table-responsive">
+    <tr class="onerace">
+      <td class="oneracepoints">&nbsp;</td>
+      <td>1st</td>
+      <td>2nd</td>
+      <td>3rd</td>
+      <td>4th</td>
+      <td>5th</td>
+      <td>6th</td>
+      <td>7th</td>
+      <td>8th</td>
+      <td>9th</td>
+      <td>10th</td>
+      <td>11th</td>
+      <td>12th</td>
+      <td>Result</td>
+    </tr>
+    <tr class="onerace">
+      <td round="1">Race 1</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="2">Race 2</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="3">Race 3</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="4">Race 4</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="5">Race 5</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="6">Race 6</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="7">Race 7</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="8">Race 8</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="9">Race 9</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="10"><span class="title">Race 10</span></td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="11">Race 11</td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td round="12">Final Race </td>
+      <td><input type="checkbox" value="15" class="chb"></td>
+      <td><input type="checkbox" value="12" class="chb"></td>
+      <td><input type="checkbox" value="10" class="chb"></td>
+      <td><input type="checkbox" value="9" class="chb"></td>
+      <td><input type="checkbox" value="8" class="chb"></td>
+      <td><input type="checkbox" value="7" class="chb"></td>
+      <td><input type="checkbox" value="6" class="chb"></td>
+      <td><input type="checkbox" value="5" class="chb"></td>
+      <td><input type="checkbox" value="4" class="chb"></td>
+      <td><input type="checkbox" value="3" class="chb"></td>
+      <td><input type="checkbox" value="2" class="chb"></td>
+      <td><input type="checkbox" value="1" class="chb"></td>
+      <td class="oneracepoints">&nbsp;</td>
+    </tr>
+    <tr class="onerace">
+      <td> </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<!-- script for plot graph -->
+
+
+<!-- script for calc point -->
+<script>
+$('.chb').on( "click",function(){
+  //total calculation
+  $(".printer-type tr:not(:first, last) td:last-child").text(function () {
+    var OneRaceValA = 0;
+    var OneRaceValB = 0;
+    var diff = 0;
+    var round = 0;
+    var TotalValA = 0;
+    var TotalValB = 0;
+
+    var ThisRaceResult = "";
+    var CumlRaceResult = "";
+    var RemRace = 0;
+    var TotalRaceNum = $("#total_race_num").val();
+
+    // Score for one race
+    $(this).prevAll().each(function () {
+      OneRaceValA += parseInt($(this).children('.chb:checked').val()) || 0;
+      round = parseInt($(this).attr('round'));
+    });
+    OneRaceValB = 82 - OneRaceValA;
+    ThisRaceResult = OneRaceValA + "-" + OneRaceValB ;
+
+    // Cumulative score
+    var temp = "";
+    $("#resultarray").find('.oneracepoints:gt(0):lt('+(round-1)+')').each(function () {
+      temp = $(this).text().split('/')[0].split('-');
+      TotalValA += parseInt(temp[0]);
+      TotalValB += parseInt(temp[1]);
+    });
+
+    TotalValA += OneRaceValA;
+    TotalValB += OneRaceValB;
+
+    CumlRaceResult = $("#teamA").val() + " " +  TotalValA + "-" + TotalValB + " " + $("#teamB").val();
+    diff = TotalValA - TotalValB;
+
+    // Remined Race
+    RemRace = " Rem:" + (TotalRaceNum - round);
+
+    return ThisRaceResult + " / " + CumlRaceResult + " (diff:" + diff + RemRace + ")";
+
+  });
+  $(".printer-type tr:last td:last").text("")
+});
+</script>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- sakura -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3422749596492644"
+     data-ad-slot="1648297909"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</body>
+</html>

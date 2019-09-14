@@ -1,0 +1,168 @@
+body {
+  font-family: "Rounded Mplus 1c";
+  padding: 30px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left : auto;
+}
+
+.oneracepoints{
+  width: 120px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.course_table{
+  padding: auto;
+  font-family: "M PLUS Rounded 1c";
+}
+
+.course_table td{
+  font-size: 10px;
+  padding: 10px;
+  background-color: #ffffff !important;
+}
+
+.courselisttable{
+  font-size: 10px;
+}
+
+.cstextarea{
+  font-size: 8px;
+  border: 0px;
+  background-color: #fcfcfc;
+  padding: 10px;
+}
+
+img {
+  width: 100px;
+  border-radius: 15%;
+  border: 2px #ffffff solid;
+}
+
+.imclass1
+{
+    filter: blur(1px);
+    border: 2px red solid;
+}
+
+.imclass2 {
+    filter: blur(1px);
+    border: 2px blue solid;
+}
+
+.imclass3 {
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+td{
+  text-align: center;
+  vertical-align: middle;
+  width: 70px;
+}
+
+
+td:nth-child(5){
+  background-color: #e5e5e5;
+}
+
+td:nth-child(9){
+  background-color: #e5e5e5;
+}
+
+td:nth-child(13){
+  background-color: #e5e5e5;
+}
+
+
+input[type=radio]{
+  margin: 25px;
+  transform: scale(1.4);
+}
+
+input[type=radio]:nth-child(2n+1){
+  margin: 5px;
+  transform: scale(1.4);
+  -webkit-transition: all 400ms;
+  transition:         all 400ms;
+}
+
+input[type=radio]:nth-child(2n+1):hover{
+  margin: 5px;
+  transform: scale(1.8);
+}
+
+input[type=radio]:nth-child(1):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #006e54;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type=radio]:nth-child(3):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #915c8b;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type=radio]:nth-child(5):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #6e7955;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type=radio]:nth-child(7):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #84b9cb;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type=radio]:nth-child(9):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #b0ca71;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type=radio]:nth-child(11):hover::after{
+  content: attr(teamname);
+  font-size: 10px;
+  left: -13px;
+  top: -5px;
+  color: #fabf14;
+  position: relative;
+  z-index: -100;
+  overflow: hidden;
+  white-space: nowrap;
+}
